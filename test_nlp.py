@@ -1,12 +1,22 @@
 import pandas as pd
 import numpy as np
 import re
+import os
+
+def create_df(path_file):
+    """
+        input: 
+            path_file - путь к файлу
+    """
+    try:
+        df = pd.read_csv(path_file, delimiter=',')
+    except IOError as e:
+        print('Not file path, empty dataframe')        
+    return df
 
 
-
-
-df = pd.read_csv('/content/drive/MyDrive/test_data_nlp/test_data.csv', delimiter=',')
-
+df = create_df(path_file)
+df.head()
 
 # регулярные выражения
 # шаблон (слова/сочетания словб которые необходимо найти в столбцах)
