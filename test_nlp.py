@@ -40,6 +40,9 @@ lst_diag = df['dlg_id'].unique()
 greeting = re.compile('(здравствуйте)|(добрый день)|(до свидания)')
 
 man_text = []
+goodBye = np.zeros(len(lst_diag),dtype=('U25'))
+full_greeting = np.zeros(len(lst_diag),dtype=('U25'))
+
 for j in range(len(lst_diag)):
 
     dfm1 = df[(df.dlg_id == lst_diag[j]) & (df.role == 'manager') & (df.text)]
@@ -59,4 +62,11 @@ for j in range(len(lst_diag)):
             elif ('здравствуйте','до свидания') in s[0]:
                 print(f'manager_{j} полное приветсвие')
 
+data = {
+    'dialog':lst_diag,
+    'say_goodBye':goodBye,
+    'full_greeting':full_greeting}
+result = pd.DataFrame(data)                
+                
 df.to_csv('test.csv', index=False)
+result
